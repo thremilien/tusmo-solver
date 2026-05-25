@@ -24,7 +24,7 @@ def fwords_arr(words):
     n = len(words)
     L = len(words[0])
 
-    words_arr = np.empty((n, L))
+    words_arr = np.empty((n, L), dtype=int)
     for i, word in enumerate(words):
         for j, letter in enumerate(word):
             words_arr[i, j] = ord(letter) - 65
@@ -35,7 +35,7 @@ def fcounts_arr(words):
     n = len(words)
     L = len(words[0])
 
-    counts_arr = np.zeros((n, 26))
+    counts_arr = np.zeros((n, 26), dtype=int)
     for i, word in enumerate(words):
         for j, letter in enumerate(word):
             counts_arr[i, ord(letter)-65] += 1
