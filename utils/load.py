@@ -3,15 +3,28 @@ import numpy as np
 ALPHABET = set(chr(i) for i in range(65, 65+26))
 
 #### Load the data ####
-def load(L, file_path="./words_fr/fr_full.txt"):
-    with open(file_path, "r") as file:
-        words = file.read()
-        words = words.split("[")[1].split("]")[0]
-        words = [word.replace("\"", "").strip() for word in words.split(",")]
-        words = list(filter(lambda x : len(x) == L, words))
-        words = list(filter(ffilter, words))
-    
-    return words
+def load(dataset, L=None):
+    if dataset == "tusmo":
+        if L is None:
+            print("Tusmo dataset needs a length")
+            exit()
+        
+        with open("./data/tusmo_full_raw.txt", "r") as file:
+            words = file.read()
+            words = words.split("[")[1].split("]")[0]
+            words = [word.replace("\"", "").strip() for word in words.split(",")]
+            words = list(filter(lambda x : len(x) == L, words))
+            words = list(filter(ffilter, words))
+        
+        return words
+
+    if dataset == "wordle":
+        with open("./data/wordle.txt", "r") as file:
+            words = file.read()
+            words = words.split("\n")
+            words = [word.upper() for word in words]
+        
+        return words
 
 def ffilter(word):
     for letter in word:
