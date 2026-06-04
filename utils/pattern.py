@@ -25,12 +25,3 @@ def pattern(words_arr, counts_arr, T):
     power = 3**(np.arange(0, L))
     
     return pattern_arr @ power
-
-def score(words_arr, counts_arr, T):
-    n = words_arr.shape[0]
-    L = words_arr.shape[1]
-
-    pattern_T = pattern(words_arr, counts_arr, T)
-    counts = np.bincount(pattern_T, minlength=3**L)
-    
-    return (counts.astype(np.int64)**2).sum()/n
